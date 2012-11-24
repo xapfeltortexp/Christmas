@@ -16,7 +16,7 @@ public class Christmas extends JavaPlugin {
 
 	public ChristmasListener listener;
 	public ChristmasUtil util;
-	public ChristmasConfigLoader ccl = new ChristmasConfigLoader(this);
+	public ChristmasConfigLoader ccl;
 	
 	public boolean sendMessage;
 	
@@ -28,6 +28,9 @@ public class Christmas extends JavaPlugin {
 		
 		/* get Util */
 		util = new ChristmasUtil(this);
+		
+		/* Config */
+		ccl = new ChristmasConfigLoader(this);
 		
 		/* Manage Configs*/
 		ccl.load();
@@ -46,7 +49,7 @@ public class Christmas extends JavaPlugin {
 			double y = ccl.getConfig().getDouble("ChristmasSign.Y");
 			double z = ccl.getConfig().getDouble("ChristmasSign.Z");
 			
-			util.startScheduler(40000, x, y, z);
+			util.startScheduler(60 * 60, x, y, z);
 		}
 	}
 

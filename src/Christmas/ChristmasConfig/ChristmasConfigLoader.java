@@ -13,8 +13,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class ChristmasConfigLoader {
+	
 	private YamlConfiguration config;
 	private File configFile;
+	
 	@SuppressWarnings("unused")
 	private Plugin plugin;
 

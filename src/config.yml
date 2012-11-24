@@ -1,153 +1,171 @@
-#*.*.*.*.*.*.*.*Christmas*.*.*.*.*.*.*.*
-#*.                                   .*
-#*.              Config               .*
-#*.                                   .*
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
-
 sendMessage: true
 Message: '%player% opend a Door Day %day%'
 
-Day1:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day2:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day3:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day4:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day5:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day6:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day7:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day8:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day9:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day10:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day11:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day12:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day13:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day14:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day15:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day16:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day17:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day18:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day19:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day20:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day21:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day22:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day23:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
-Day24:
- DoCommand: false
- GiveItems: true
- Items:
- - 5,10
- Command: 'say Its Christmas'
+Day_1:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_2:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_3:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_4:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_5:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_6:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_7:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_8:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_9:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_10:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_11:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_12:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_13:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_14:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_15:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_16:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_17:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_18:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_19:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_20:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_21:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_22:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_23:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
+Day_24:
+  DoCommand: false
+  GiveItems: true
+  Items:
+  - 5,10
+  Command:
+  - say Its Christmas
