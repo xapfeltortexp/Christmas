@@ -43,6 +43,13 @@ public class ChristmasListener implements Listener {
 		String name = player.getName();
 
 		main.ccl.load();
+		
+		Calendar cal = Calendar.getInstance();
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		
+		if(day > 24) {
+			return;
+		}
 
 		if (!(main.ccl.getConfig().getStringList("PresentGet").contains(name))) {
 			player.sendMessage(main.prefix + "You can open the Door " + ChatColor.GREEN + date + ChatColor.WHITE + "!");
@@ -162,8 +169,11 @@ public class ChristmasListener implements Listener {
 
 			Calendar cal = Calendar.getInstance();
 			int day = cal.get(Calendar.DAY_OF_MONTH);
-
-			if (day != Integer.valueOf(sign.getLine(0))) {
+			String nowtoday = String.valueOf(day);
+			
+			String[] splitted = sign.getLine(1).split(ChatColor.AQUA + ".");
+			
+			if (nowtoday != splitted[0]) {
 
 				double x = main.ccl.getConfig().getDouble("ChristmasSign.X");
 				double y = main.ccl.getConfig().getDouble("ChristmasSign.Y");
