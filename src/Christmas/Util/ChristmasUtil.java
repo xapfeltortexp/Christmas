@@ -2,6 +2,7 @@ package Christmas.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import net.minecraft.server.Packet103SetSlot;
@@ -53,8 +54,14 @@ public class ChristmasUtil {
 	}
 
 	public void sendMessage(Player player) {
+		
+		Calendar cal = Calendar.getInstance();
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		String nowday = String.valueOf(day);
+		
 		String message = main.getConfig().getString("Message");
-		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%date%", date));
+		
+		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%day%", nowday));
 	}
 
 	public void updateInventory(Player player) {

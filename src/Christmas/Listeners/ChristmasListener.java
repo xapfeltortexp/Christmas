@@ -72,7 +72,7 @@ public class ChristmasListener implements Listener {
 			main.ccl.load();
 
 			if (main.ccl.getConfig().getString("ChristmasSign.X") == null) {
-				
+
 				int x = event.getBlock().getX();
 				int y = event.getBlock().getY();
 				int z = event.getBlock().getZ();
@@ -81,14 +81,14 @@ public class ChristmasListener implements Listener {
 				main.ccl.getConfig().set("ChristmasSign.Y", y);
 				main.ccl.getConfig().set("ChristmasSign.Z", z);
 				player.sendMessage(main.prefix + "New Sign successful created");
-				util.sendMessage(player);
+
 				util.setRunning(true);
 				util.startScheduler(60 * 60, x, y, z);
 
 				main.ccl.save();
 
 			} else {
-				
+
 				int x = event.getBlock().getX();
 				int y = event.getBlock().getY();
 				int z = event.getBlock().getZ();
@@ -125,9 +125,9 @@ public class ChristmasListener implements Listener {
 		Sign sign = (Sign) event.getBlock().getState();
 
 		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]")) {
-			
+
 			util.setRunning(false);
-			
+
 			player.sendMessage(main.prefix + "You destroy the Christmas Sign!");
 
 			main.ccl.load();
@@ -159,19 +159,19 @@ public class ChristmasListener implements Listener {
 		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]")) {
 
 			main.ccl.load();
-			
+
 			Calendar cal = Calendar.getInstance();
 			int day = cal.get(Calendar.DAY_OF_MONTH);
-			
-			if(day != Integer.valueOf(sign.getLine(0))) {
-				
+
+			if (day != Integer.valueOf(sign.getLine(0))) {
+
 				double x = main.ccl.getConfig().getDouble("ChristmasSign.X");
 				double y = main.ccl.getConfig().getDouble("ChristmasSign.Y");
 				double z = main.ccl.getConfig().getDouble("ChristmasSign.Z");
-				
+
 				util.aktualisieren(x, y, z);
 			}
-			
+
 			if (main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(player.getName())) {
 				player.sendMessage(main.prefix + "You already got your Present for today.");
 				return;
@@ -215,6 +215,10 @@ public class ChristmasListener implements Listener {
 						}
 					}
 				}
+			}
+			
+			if (main.getConfig().getBoolean("sendMessage", false)) {
+				util.sendMessage(player);
 			}
 
 			main.ccl.load();

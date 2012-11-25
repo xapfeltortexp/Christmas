@@ -5,13 +5,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import Christmas.Christmas;
+import Christmas.Util.ChristmasUtil;
 
 public class ChristmasCommand implements CommandExecutor {
 	
 	public Christmas main;
+	public ChristmasUtil util;
 	
 	public ChristmasCommand(Christmas main) {
 		this.main = main;
+		this.util = main.util;
 	}
 	
 	@Override
