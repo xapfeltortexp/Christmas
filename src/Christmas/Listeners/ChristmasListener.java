@@ -56,10 +56,6 @@ public class ChristmasListener implements Listener {
 
 		Player player = event.getPlayer();
 
-		int x = event.getBlock().getX();
-		int y = event.getBlock().getY();
-		int z = event.getBlock().getZ();
-
 		if (event.getLine(0).equalsIgnoreCase("[Christmas]")) {
 
 			if (!(player.hasPermission("christmas.sign.create"))) {
@@ -67,6 +63,10 @@ public class ChristmasListener implements Listener {
 				event.getBlock().breakNaturally();
 				return;
 			}
+			
+			int x = event.getBlock().getX();
+			int y = event.getBlock().getY();
+			int z = event.getBlock().getZ();
 
 			String date = (new SimpleDateFormat("24.MM.yyyy").format(new Date()));
 
