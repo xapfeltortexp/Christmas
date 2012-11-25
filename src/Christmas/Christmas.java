@@ -19,7 +19,6 @@ public class Christmas extends JavaPlugin {
 	public ChristmasUtil util;
 	public ChristmasConfigLoader ccl;
 	public ChristmasCommand cmd;
-	
 	public boolean sendMessage;
 	
 	public String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Christmas" + ChatColor.AQUA + "] " + ChatColor.WHITE;
