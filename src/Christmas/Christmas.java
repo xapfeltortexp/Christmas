@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Christmas.ChristmasConfig.ChristmasConfigLoader;
+import Christmas.Commands.ChristmasCommand;
 import Christmas.Listeners.ChristmasListener;
 import Christmas.Util.ChristmasUtil;
 
@@ -17,6 +18,7 @@ public class Christmas extends JavaPlugin {
 	public ChristmasListener listener;
 	public ChristmasUtil util;
 	public ChristmasConfigLoader ccl;
+	public ChristmasCommand cmd;
 	
 	public boolean sendMessage;
 	
@@ -35,6 +37,10 @@ public class Christmas extends JavaPlugin {
 		/* Manage Configs*/
 		ccl.load();
 		
+		/* Command */
+		cmd = new ChristmasCommand(this);
+		getCommand("christmas").setExecutor(cmd);
+		
 		/* Register Events */
 		listener = new ChristmasListener(this);
 		
@@ -44,6 +50,8 @@ public class Christmas extends JavaPlugin {
 		System.out.println("[Christmas] Plugin successful loaded.");
 		
 		if(ccl.getConfig().getString("ChristmasSign.X") != null) {
+			
+			util.setRunning(true);
 			
 			double x = ccl.getConfig().getDouble("ChristmasSign.X");
 			double y = ccl.getConfig().getDouble("ChristmasSign.Y");

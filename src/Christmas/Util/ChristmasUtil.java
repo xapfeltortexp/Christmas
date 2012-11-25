@@ -21,20 +21,29 @@ import Christmas.Christmas;
 public class ChristmasUtil {
 
 	public ArrayList<String> player = new ArrayList<String>();
-	
+
 	public Christmas main;
-	
+	public boolean running;
+
 	public ChristmasUtil(Christmas main) {
 		this.main = main;
 	}
+
+	public boolean isRunning() {
+		return running;
+	}
 	
+	public boolean setRunning(boolean yes_no) {
+		return running = yes_no;
+	}
+
 	public final String date = (new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
 
 	public ArrayList<String> getOpener(String name) {
 		name = player.get(0);
 		return player;
 	}
-	
+
 	public String replaceColorCodes(String message) {
 		return message.replaceAll("(?i)&([a-n0-9])", "§$1");
 	}
@@ -42,12 +51,12 @@ public class ChristmasUtil {
 	public void removeOpener(ArrayList<String> arrayList, String name) {
 		arrayList.remove(name);
 	}
-	
+
 	public void sendMessage(Player player) {
 		String message = main.getConfig().getString("Message");
 		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%date%", date));
 	}
-	
+
 	public void updateInventory(Player player) {
 
 		CraftPlayer c = (CraftPlayer) player;
@@ -81,26 +90,44 @@ public class ChristmasUtil {
 			public void run() {
 
 				try {
-					
-					Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
-					Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
-					Sign sign = (Sign) block.getState();
 
-					if (!(block.getState() instanceof Sign)) {
-						return;
+					while (isRunning() == true) {
+
+						Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
+						Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
+						Sign sign = (Sign) block.getState();
+
+						if (!(block.getState() instanceof Sign)) {
+							return;
+						}
+
+						/* Set the Sign */
+						sign.setLine(1, ChatColor.AQUA + date);
+						sign.update(true);
+
+						Thread.sleep(1000 * sekunden);
+
 					}
-
-					/* Set the Sign */
-					sign.setLine(1, ChatColor.AQUA + date);
-					sign.update(true);
-					
-					Thread.sleep(1000 * sekunden);
-					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		}.start();
+	}
+
+	public void aktualisieren(final double x, final double y, final double z) {
+
+		Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
+		Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
+		Sign sign = (Sign) block.getState();
+
+		if (!(block.getState() instanceof Sign)) {
+			return;
+		}
+
+		/* Set the Sign */
+		sign.setLine(1, ChatColor.AQUA + date);
+		sign.update(true);
 	}
 
 }

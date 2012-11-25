@@ -4,3 +4,8 @@ author: xapfeltortexp, DarkBlade12
 website: http://www.lostforce.com
 
 main: Christmas.Christmas
+
+commands:
+  christmas:
+    description: Christmas Command
+    aliases: [cm]
