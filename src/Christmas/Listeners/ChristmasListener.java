@@ -64,7 +64,7 @@ public class ChristmasListener implements Listener {
 				return;
 			}
 
-			String date = (new SimpleDateFormat("24.MM.yyyy").format(new Date()));
+			String date = (new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
 
 			event.setLine(0, "[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]");
 			event.setLine(1, ChatColor.AQUA + date);
