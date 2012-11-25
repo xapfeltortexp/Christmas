@@ -63,10 +63,6 @@ public class ChristmasListener implements Listener {
 				event.getBlock().breakNaturally();
 				return;
 			}
-			
-			int x = event.getBlock().getX();
-			int y = event.getBlock().getY();
-			int z = event.getBlock().getZ();
 
 			String date = (new SimpleDateFormat("24.MM.yyyy").format(new Date()));
 
@@ -76,6 +72,10 @@ public class ChristmasListener implements Listener {
 			main.ccl.load();
 
 			if (main.ccl.getConfig().getString("ChristmasSign.X") == null) {
+				
+				int x = event.getBlock().getX();
+				int y = event.getBlock().getY();
+				int z = event.getBlock().getZ();
 
 				main.ccl.getConfig().set("ChristmasSign.X", x);
 				main.ccl.getConfig().set("ChristmasSign.Y", y);
@@ -88,6 +88,10 @@ public class ChristmasListener implements Listener {
 				main.ccl.save();
 
 			} else {
+				
+				int x = event.getBlock().getX();
+				int y = event.getBlock().getY();
+				int z = event.getBlock().getZ();
 
 				int mainx = main.ccl.getConfig().getInt("ChristmasSign.X");
 				int mainy = main.ccl.getConfig().getInt("ChristmasSign.Y");
