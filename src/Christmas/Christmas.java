@@ -46,7 +46,7 @@ public class Christmas extends JavaPlugin {
 		/* Load config.yml*/
 		loadConfig();
 		
-		System.out.println("[Christmas] Plugin successful loaded.");
+		System.out.println("[Christmas] Plugin successfully loaded.");
 		
 		if(ccl.getConfig().getString("ChristmasSign.X") != null) {
 			

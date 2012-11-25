@@ -188,7 +188,7 @@ public class ChristmasListener implements Listener {
 			}
 
 			if (Integer.valueOf(date) > 24) {
-				player.sendMessage(main.prefix + "The Advents Calender just have 24 Doors :) Sorry");
+				player.sendMessage(main.prefix + "The advent calendar just has 24 Doors :) Sorry");
 				return;
 			}
 
