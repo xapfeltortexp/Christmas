@@ -51,7 +51,7 @@ public class ChristmasListener implements Listener {
 			return;
 		}
 
-		if (!(main.ccl.getConfig().getStringList("PresentGet").contains(name))) {
+		if (!(main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(name))) {
 			player.sendMessage(main.prefix + "You can open the Door " + ChatColor.GREEN + date + ChatColor.WHITE + "!");
 		}
 
