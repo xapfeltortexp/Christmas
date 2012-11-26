@@ -33,7 +33,7 @@ public class ChristmasUtil {
 	public boolean isRunning() {
 		return running;
 	}
-	
+
 	public boolean setRunning(boolean yes_no) {
 		return running = yes_no;
 	}
@@ -54,13 +54,13 @@ public class ChristmasUtil {
 	}
 
 	public void sendMessage(Player player) {
-		
+
 		Calendar cal = Calendar.getInstance();
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String nowday = String.valueOf(day);
-		
+
 		String message = main.getConfig().getString("Message");
-		
+
 		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%day%", nowday));
 	}
 
@@ -102,12 +102,10 @@ public class ChristmasUtil {
 
 						Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
 						Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
-						Sign sign = (Sign) block.getState();
-
 						if (!(block.getState() instanceof Sign)) {
 							return;
 						}
-
+						Sign sign = (Sign) block.getState();
 						/* Set the Sign */
 						sign.setLine(1, ChatColor.AQUA + date);
 						sign.update(true);
