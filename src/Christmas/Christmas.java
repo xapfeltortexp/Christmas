@@ -1,6 +1,7 @@
 package Christmas;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import Christmas.ChristmasConfig.ChristmasConfigLoader;
 import Christmas.Commands.ChristmasCommand;
 import Christmas.Listeners.ChristmasListener;
+import Christmas.Metrics.Metrics;
 import Christmas.Util.ChristmasUtil;
 
 public class Christmas extends JavaPlugin {
@@ -20,42 +22,56 @@ public class Christmas extends JavaPlugin {
 	public ChristmasConfigLoader ccl;
 	public ChristmasCommand cmd;
 	public boolean sendMessage;
-	
+
 	public String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Christmas" + ChatColor.AQUA + "] " + ChatColor.WHITE;
 	public final String String = (new SimpleDateFormat("dd").format(new Date()));
 
 	/* Enable the Plugin */
 	public void onEnable() {
-		
+
+		/* Metrics */
+		try {
+			Metrics m = new Metrics(this);
+			
+			if(m.isOptOut()) {
+				System.out.println("[Christmas] Metrics disabled!");
+			} else {
+				System.out.println("[Christmas] This Plugin is using Metrics by Hidendra!");
+				m.start();
+			}
+		} catch (IOException e) {
+			System.out.println("[Christmas] An Error occured while start Metrics." + e);
+		}
+
 		/* get Util */
 		util = new ChristmasUtil(this);
-		
+
 		/* Config */
 		ccl = new ChristmasConfigLoader(this);
-		
+
 		/* Manage Configs*/
 		ccl.load();
-		
+
 		/* Command */
 		cmd = new ChristmasCommand(this);
 		getCommand("christmas").setExecutor(cmd);
-		
+
 		/* Register Events */
 		listener = new ChristmasListener(this);
-		
+
 		/* Load config.yml*/
 		loadConfig();
-		
+
 		System.out.println("[Christmas] Plugin successfully loaded.");
-		
-		if(ccl.getConfig().getString("ChristmasSign.X") != null) {
-			
+
+		if (ccl.getConfig().getString("ChristmasSign.X") != null) {
+
 			util.setRunning(true);
-			
+
 			double x = ccl.getConfig().getDouble("ChristmasSign.X");
 			double y = ccl.getConfig().getDouble("ChristmasSign.Y");
 			double z = ccl.getConfig().getDouble("ChristmasSign.Z");
-			
+
 			util.startScheduler(60 * 60, x, y, z);
 		}
 	}
@@ -67,7 +83,7 @@ public class Christmas extends JavaPlugin {
 
 	/* Manage config.yml*/
 	public void loadConfig() {
-		
+
 		FileConfiguration config;
 		if (new File("plugins/Christmas/config.yml").exists()) {
 			config = this.getConfig();
