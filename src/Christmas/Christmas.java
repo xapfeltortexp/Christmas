@@ -94,6 +94,7 @@ public class Christmas extends JavaPlugin {
 			config = this.getConfig();
 			System.out.println("[Christmas] New config file has been successfully created.");
 		}
+		getConfig().options().header("How to use the Items you should get when you open a door: \nExample: - 35,14,2 \nHere you will get: 35 with the Data Value 14 (its Redwoold) and amount 2 :) Understand it?");
 		saveConfig();
 	}
 }

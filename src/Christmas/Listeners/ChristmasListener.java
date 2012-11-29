@@ -43,11 +43,11 @@ public class ChristmasListener implements Listener {
 		String name = player.getName();
 
 		main.ccl.load();
-		
+
 		Calendar cal = Calendar.getInstance();
 		int day = cal.get(Calendar.DAY_OF_MONTH);
-		
-		if(day > 24) {
+
+		if (day > 24) {
 			return;
 		}
 
@@ -170,9 +170,9 @@ public class ChristmasListener implements Listener {
 			Calendar cal = Calendar.getInstance();
 			int day = cal.get(Calendar.DAY_OF_MONTH);
 			String nowtoday = String.valueOf(day);
-			
+
 			String[] splitted = sign.getLine(1).split(ChatColor.AQUA + ".");
-			
+
 			if (nowtoday != splitted[0]) {
 
 				double x = main.ccl.getConfig().getDouble("ChristmasSign.X");
@@ -207,11 +207,20 @@ public class ChristmasListener implements Listener {
 						for (String id : allItems) {
 
 							String[] item = id.split(",");
-							int itemID = Integer.valueOf(item[0]);
 
-							int amount = Integer.valueOf(item[1]);
+							if (item.length == 3) {
+								int itemID = Integer.valueOf(item[0]);
+								int amountID = Integer.valueOf(item[2]);
+								int dataID = Integer.valueOf(item[1]);
 
-							player.getInventory().addItem(new ItemStack(itemID, amount));
+								player.getInventory().addItem(new ItemStack(itemID, amountID, (short) dataID));
+							} else if (item.length == 2) {
+
+								int itemID = Integer.valueOf(item[0]);
+								int amountID = Integer.valueOf(item[1]);
+
+								player.getInventory().addItem(new ItemStack(itemID, amountID));
+							}
 
 							util.updateInventory(player);
 						}
@@ -226,7 +235,7 @@ public class ChristmasListener implements Listener {
 					}
 				}
 			}
-			
+
 			if (main.getConfig().getBoolean("sendMessage", false)) {
 				util.sendMessage(player);
 			}
