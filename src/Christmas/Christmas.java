@@ -42,7 +42,7 @@ public class Christmas extends JavaPlugin {
 		} catch (IOException e) {
 			System.out.println("[Christmas] An Error occured while start Metrics." + e);
 		}
-
+		//Test
 		/* get Util */
 		util = new ChristmasUtil(this);
 
