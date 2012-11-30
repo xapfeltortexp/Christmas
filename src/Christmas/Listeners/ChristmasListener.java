@@ -196,8 +196,6 @@ public class ChristmasListener implements Listener {
 
 				if (i == day) {
 
-					player.sendMessage("" + i);
-
 					String dateInConfig = "Day_" + day;
 
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
@@ -215,7 +213,7 @@ public class ChristmasListener implements Listener {
 
 								player.getInventory().addItem(new ItemStack(itemID, amountID, (short) dataID));
 							} else if (item.length == 2) {
-
+								
 								int itemID = Integer.valueOf(item[0]);
 								int amountID = Integer.valueOf(item[1]);
 
