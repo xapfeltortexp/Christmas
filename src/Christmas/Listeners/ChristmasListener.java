@@ -87,7 +87,7 @@ public class ChristmasListener implements Listener {
 				main.ccl.getConfig().set("ChristmasSign.X", x);
 				main.ccl.getConfig().set("ChristmasSign.Y", y);
 				main.ccl.getConfig().set("ChristmasSign.Z", z);
-				player.sendMessage(main.prefix + "New Sign successful created");
+				player.sendMessage(main.prefix + "You created a new sign!");
 
 				util.setRunning(true);
 				util.startScheduler(60 * 60, x, y, z);
@@ -106,12 +106,12 @@ public class ChristmasListener implements Listener {
 
 				Block block = event.getPlayer().getWorld().getBlockAt(mainx, mainy, mainz);
 				block.breakNaturally();
-				player.sendMessage(main.prefix + "The Old Christmas Sign got destroyed!");
+				player.sendMessage(main.prefix + "The old Christmas sign got destroyed!");
 
 				main.ccl.getConfig().set("ChristmasSign.X", x);
 				main.ccl.getConfig().set("ChristmasSign.Y", y);
 				main.ccl.getConfig().set("ChristmasSign.Z", z);
-				player.sendMessage(main.prefix + "SignLocation successful changed!");
+				player.sendMessage(main.prefix + "The location of the sign was successfully changed!");
 
 				main.ccl.save();
 			}
@@ -135,7 +135,7 @@ public class ChristmasListener implements Listener {
 
 			util.setRunning(false);
 
-			player.sendMessage(main.prefix + "You destroy the Christmas Sign!");
+			player.sendMessage(main.prefix + "You destroyed the Christmas sign!");
 
 			main.ccl.load();
 
@@ -183,7 +183,7 @@ public class ChristmasListener implements Listener {
 			}
 
 			if (main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(player.getName())) {
-				player.sendMessage(main.prefix + "You already got your Present for today.");
+				player.sendMessage(main.prefix + "You already got your present for today.");
 				return;
 			}
 
