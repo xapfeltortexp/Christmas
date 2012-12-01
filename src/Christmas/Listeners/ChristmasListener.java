@@ -64,7 +64,7 @@ public class ChristmasListener implements Listener {
 
 		Player player = event.getPlayer();
 
-		if (event.getLine(0).equalsIgnoreCase("[Christmas]")) {
+		if (event.getLine(0).equalsIgnoreCase("[Christmas]") || event.getLine(0).equalsIgnoreCase("[Advent]")) {
 
 			if (!(player.hasPermission("christmas.sign.create"))) {
 				player.sendMessage(main.prefix + "You dont have Permissions!");
@@ -73,8 +73,12 @@ public class ChristmasListener implements Listener {
 			}
 
 			String date = (new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+			if (event.getLine(0).equalsIgnoreCase("[Christmas]")) {
+				event.setLine(0, "[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]");
+			} else if (event.getLine(0).equalsIgnoreCase("[Advent]")) {
+				event.setLine(0, "[" + ChatColor.GREEN + "Advent" + ChatColor.BLACK + "]");
+			}
 
-			event.setLine(0, "[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]");
 			event.setLine(1, ChatColor.AQUA + date);
 
 			main.ccl.load();
@@ -132,7 +136,7 @@ public class ChristmasListener implements Listener {
 
 		Sign sign = (Sign) event.getBlock().getState();
 
-		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]")) {
+		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]") || sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Advent" + ChatColor.BLACK + "]")) {
 
 			util.setRunning(false);
 
@@ -164,7 +168,7 @@ public class ChristmasListener implements Listener {
 
 		Sign sign = (Sign) event.getClickedBlock().getState();
 
-		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]")) {
+		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]") || sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Advent" + ChatColor.BLACK + "]")) {
 
 			main.ccl.load();
 
