@@ -1,63 +1,63 @@
 sendMessage: true
 Message: '%player% opend a Door Day %day%'
 
-Day_1:
+Day_01:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_2:
+Day_02:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_3:
+Day_03:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_4:
+Day_04:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_5:
+Day_05:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_6:
+Day_06:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_7:
+Day_07:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_8:
+Day_08:
   DoCommand: false
   GiveItems: true
   Items:
   - 35,10,10
   Command:
   - say Its Christmas
-Day_9:
+Day_09:
   DoCommand: false
   GiveItems: true
   Items:

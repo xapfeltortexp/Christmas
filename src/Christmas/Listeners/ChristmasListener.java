@@ -175,9 +175,9 @@ public class ChristmasListener implements Listener {
 
 			if (nowtoday != splitted[0]) {
 
-				double x = main.ccl.getConfig().getDouble("ChristmasSign.X");
-				double y = main.ccl.getConfig().getDouble("ChristmasSign.Y");
-				double z = main.ccl.getConfig().getDouble("ChristmasSign.Z");
+				int x = main.ccl.getConfig().getInt("ChristmasSign.X");
+				int y = main.ccl.getConfig().getInt("ChristmasSign.Y");
+				int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
 
 				util.aktualisieren(x, y, z);
 			}
