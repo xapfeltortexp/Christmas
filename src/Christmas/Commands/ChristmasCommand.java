@@ -26,14 +26,12 @@ public class ChristmasCommand implements CommandExecutor {
 				sender.sendMessage("§aDevelopers: §bxapfeltortexp§f, §bDarkBlade12");
 				return true;
 			}
-
 			if (args[0].equalsIgnoreCase("reload") && args.length == 1) {
 
 				if (!(sender.hasPermission("christmas.reload"))) {
 					sender.sendMessage(main.prefix + "You dont have Permissions");
 					return true;
 				}
-
 				main.reloadConfig();
 				main.ccl.load();
 				main.ccl.save();

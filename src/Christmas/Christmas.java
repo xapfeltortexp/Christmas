@@ -22,7 +22,6 @@ public class Christmas extends JavaPlugin {
 	public ChristmasConfigLoader ccl;
 	public ChristmasCommand cmd;
 	public boolean sendMessage;
-
 	public String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Christmas" + ChatColor.AQUA + "] " + ChatColor.WHITE;
 	public final String String = (new SimpleDateFormat("dd").format(new Date()));
 
@@ -94,7 +93,7 @@ public class Christmas extends JavaPlugin {
 			config = this.getConfig();
 			System.out.println("[Christmas] New config file has been successfully created.");
 		}
-		getConfig().options().header("How to use the Items you should get when you open a door: \nExample: - 35,14,2 \nHere you will get: 35 with the Data Value 14 (its Redwoold) and amount 2 :) Understand it?");
+		getConfig().options().header("How to add the Items you'll get when you open a door: \nExample: - 35,14,2 \nWith this you will get: Item with ID 35 and the data value 14 (Red Wool) and amount 2 :) Understand it?");
 		saveConfig();
 	}
 }
