@@ -53,13 +53,13 @@ public class ChristmasUtil {
 		arrayList.remove(name);
 	}
 
-	public void sendMessage(Player player) {
+	public void sendOpenedDoor(Player player) {
 
 		Calendar cal = Calendar.getInstance();
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String nowday = String.valueOf(day);
 
-		String message = main.getConfig().getString("Message");
+		String message = main.getConfig().getString("Messages.OpenedDoor");
 
 		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%day%", nowday));
 	}

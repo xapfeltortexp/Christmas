@@ -53,7 +53,7 @@ public class ChristmasListener implements Listener {
 		}
 
 		if (!(main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(name))) {
-			player.sendMessage(main.prefix + "You can open the Door " + ChatColor.GREEN + date + ChatColor.WHITE + "!");
+			player.sendMessage(main.prefix + util.replaceColorCodes(main.getConfig().getString("Messages.CanOpen").replace("%number%", date)));
 		}
 
 		return;
@@ -193,22 +193,20 @@ public class ChristmasListener implements Listener {
 			}
 
 			if (main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(player.getName())) {
-				player.sendMessage(main.prefix + "You already got your present for today.");
+				player.sendMessage(main.prefix + util.replaceColorCodes(main.getConfig().getString("Messages.AlreadyGot")));
 				return;
 			}
 
 			if (Integer.valueOf(date) > 24) {
-				player.sendMessage(main.prefix + "The advent calendar just has 24 Doors :) Sorry");
+				player.sendMessage(main.prefix + util.replaceColorCodes(main.getConfig().getString("Messages.Only24Doors")));
 				return;
 			}
 
 			for (int i = 1; i < 25; i++) {
 				if (i == day) {
 					String dateInConfig = "Day_" + day;
-					player.sendMessage("Day 1");
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
 					List<String> allCommands = main.getConfig().getStringList(dateInConfig + ".Command");
-					player.sendMessage(dateInConfig + ".GiveItems   ,   " + main.getConfig().getBoolean(dateInConfig + ".GiveItems"));
 					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems")) {
 						for (String id : allItems) {
 
@@ -230,7 +228,7 @@ public class ChristmasListener implements Listener {
 
 							util.updateInventory(player);
 						}
-						player.sendMessage(main.prefix + "Uhhh :) Do you like the Present for the Day " + ChatColor.GREEN + day + ChatColor.WHITE + "?");
+						player.sendMessage(main.prefix + util.replaceColorCodes(main.getConfig().getString("Messages.LikePresent").replace("%day%", day + "")));
 					}
 
 					if (main.getConfig().getBoolean(dateInConfig + ".DoCommand", false)) {
@@ -243,7 +241,7 @@ public class ChristmasListener implements Listener {
 			}
 
 			if (main.getConfig().getBoolean("sendMessage", false)) {
-				util.sendMessage(player);
+				util.sendOpenedDoor(player);
 			}
 
 			main.ccl.load();

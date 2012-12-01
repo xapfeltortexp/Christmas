@@ -1,6 +1,11 @@
 sendMessage: true
-Message: '%player% opened the door of day %day%'
-
+Messages:
+ OpenedDoor: '&2%player% &fopened the door of day &2%day%'
+ LikePresent: '&bUhhh :) Do you like the Present for the Day &2%day%&b?'
+ CanOpen: '&2You can open the door &b%number%&2!'
+ AlreadyGot: '&eYou already got the present for today. Come back tomorrow!'
+ Only24Doors: '&aThe advent calendar just has 24 doors :) Sorry'
+ 
 Day_1:
   DoCommand: false
   GiveItems: true
