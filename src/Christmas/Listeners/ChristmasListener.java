@@ -1,5 +1,6 @@
 package Christmas.Listeners;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -169,16 +170,21 @@ public class ChristmasListener implements Listener {
 
 			Calendar cal = Calendar.getInstance();
 			int day = cal.get(Calendar.DAY_OF_MONTH);
-			String nowtoday = String.valueOf(day);
-
-			String[] splitted = sign.getLine(1).split(ChatColor.AQUA + ".");
-			player.sendMessage(nowtoday  + "   &&  " + splitted[0]);
-			if (nowtoday != splitted[0]) {
-
+			Date signDate = null;
+			Calendar signCal = Calendar.getInstance();
+			String signLine = sign.getLine(1).replace("§b", "");
+			System.out.println(signLine);
+			try {
+				signDate = new SimpleDateFormat("dd.MM.yyyy").parse(signLine);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			signCal.setTime(signDate);
+			int signDay = signCal.get(Calendar.DAY_OF_MONTH);
+			if (day != signDay) {
 				int x = main.ccl.getConfig().getInt("ChristmasSign.X");
 				int y = main.ccl.getConfig().getInt("ChristmasSign.Y");
-		    	int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
-
+				int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
 				util.aktualisieren(x, y, z);
 			}
 
@@ -193,15 +199,13 @@ public class ChristmasListener implements Listener {
 			}
 
 			for (int i = 1; i < 25; i++) {
-
 				if (i == day) {
-
 					String dateInConfig = "Day_" + day;
-
+					player.sendMessage("Day 1");
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
 					List<String> allCommands = main.getConfig().getStringList(dateInConfig + ".Command");
-
-					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems", false)) {
+					player.sendMessage(dateInConfig + ".GiveItems   ,   " + main.getConfig().getBoolean(dateInConfig + ".GiveItems"));
+					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems")) {
 						for (String id : allItems) {
 
 							String[] item = id.split(",");
@@ -213,7 +217,7 @@ public class ChristmasListener implements Listener {
 
 								player.getInventory().addItem(new ItemStack(itemID, amountID, (short) dataID));
 							} else if (item.length == 2) {
-								
+
 								int itemID = Integer.valueOf(item[0]);
 								int amountID = Integer.valueOf(item[1]);
 
