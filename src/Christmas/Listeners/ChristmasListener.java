@@ -172,12 +172,12 @@ public class ChristmasListener implements Listener {
 			String nowtoday = String.valueOf(day);
 
 			String[] splitted = sign.getLine(1).split(ChatColor.AQUA + ".");
-
+			player.sendMessage(nowtoday  + "   &&  " + splitted[0]);
 			if (nowtoday != splitted[0]) {
 
 				int x = main.ccl.getConfig().getInt("ChristmasSign.X");
 				int y = main.ccl.getConfig().getInt("ChristmasSign.Y");
-				int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
+		    	int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
 
 				util.aktualisieren(x, y, z);
 			}
