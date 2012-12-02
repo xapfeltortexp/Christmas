@@ -173,7 +173,7 @@ public class ChristmasListener implements Listener {
 			Date signDate = null;
 			Calendar signCal = Calendar.getInstance();
 			String signLine = sign.getLine(1).replace("§b", "");
-			System.out.println(signLine);
+
 			try {
 				signDate = new SimpleDateFormat("dd.MM.yyyy").parse(signLine);
 			} catch (ParseException e) {
@@ -199,12 +199,13 @@ public class ChristmasListener implements Listener {
 			}
 
 			for (int i = 1; i < 25; i++) {
+				
 				if (i == day) {
+					
 					String dateInConfig = "Day_" + day;
-					player.sendMessage("Day 1");
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
 					List<String> allCommands = main.getConfig().getStringList(dateInConfig + ".Command");
-					player.sendMessage(dateInConfig + ".GiveItems   ,   " + main.getConfig().getBoolean(dateInConfig + ".GiveItems"));
+					
 					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems")) {
 						for (String id : allItems) {
 
