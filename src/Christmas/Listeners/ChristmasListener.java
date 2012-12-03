@@ -164,7 +164,7 @@ public class ChristmasListener implements Listener {
 			Date signDate = null;
 			Calendar signCal = Calendar.getInstance();
 			String signLine = sign.getLine(1).replace("§b", "");
-			System.out.println(signLine);
+
 			try {
 				signDate = new SimpleDateFormat("dd.MM.yyyy").parse(signLine);
 			} catch (ParseException e) {
@@ -172,6 +172,8 @@ public class ChristmasListener implements Listener {
 			}
 			signCal.setTime(signDate);
 			int signDay = signCal.get(Calendar.DAY_OF_MONTH);
+			
+			
 			if (day != signDay) {
 				sign.setLine(1, ChatColor.AQUA + new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime()));
 				sign.update();
@@ -188,10 +190,13 @@ public class ChristmasListener implements Listener {
 			}
 
 			for (int i = 1; i < 25; i++) {
+				
 				if (i == day) {
+					
 					String dateInConfig = "Day_" + day;
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
 					List<String> allCommands = main.getConfig().getStringList(dateInConfig + ".Command");
+					
 					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems")) {
 						for (String id : allItems) {
 
