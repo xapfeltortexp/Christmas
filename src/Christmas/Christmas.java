@@ -63,15 +63,8 @@ public class Christmas extends JavaPlugin {
 
 		System.out.println("[Christmas] Plugin successfully loaded.");
 
-		if (ccl.getConfig().getString("ChristmasSign.X") != null) {
-
-			util.setRunning(true);
-
-			double x = ccl.getConfig().getDouble("ChristmasSign.X");
-			double y = ccl.getConfig().getDouble("ChristmasSign.Y");
-			double z = ccl.getConfig().getDouble("ChristmasSign.Z");
-
-			util.startScheduler(60 * 60, x, y, z);
+		if (ccl.getConfig().getConfigurationSection("ChristmasSign") != null) {
+			util.startScheduler(this);
 		}
 	}
 

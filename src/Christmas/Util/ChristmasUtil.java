@@ -1,5 +1,6 @@
 package Christmas.Util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,11 +9,11 @@ import java.util.Date;
 import net.minecraft.server.Packet103SetSlot;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,18 +25,10 @@ public class ChristmasUtil {
 	public ArrayList<String> player = new ArrayList<String>();
 
 	public Christmas main;
-	public boolean running;
+	public int datesched;
 
 	public ChristmasUtil(Christmas main) {
 		this.main = main;
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	public boolean setRunning(boolean yes_no) {
-		return running = yes_no;
 	}
 
 	public final String date = (new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
@@ -54,13 +47,10 @@ public class ChristmasUtil {
 	}
 
 	public void sendOpenedDoor(Player player) {
-
 		Calendar cal = Calendar.getInstance();
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String nowday = String.valueOf(day);
-
 		String message = main.getConfig().getString("Messages.OpenedDoor");
-
 		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%day%", nowday));
 	}
 
@@ -90,49 +80,36 @@ public class ChristmasUtil {
 
 	}
 
-	public void startScheduler(final int sekunden, final double x, final double y, final double z) {
-
-		new Thread() {
-
+	public void startScheduler(final Christmas main) {
+		datesched = Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(main, new Runnable() {
 			public void run() {
-
+				main.ccl.load();
+				Configuration cc = main.ccl.getConfig();
+				int x = cc.getInt("ChristmasSign.X");
+				int y = cc.getInt("ChristmasSign.Y");
+				int z = cc.getInt("ChristmasSign.Z");
+				String world = cc.getString("ChristmasSign.World");
+				World w = Bukkit.getWorld(world);
+				Block sb = w.getBlockAt(x, y, z);
+				Sign s = (Sign) sb.getState();
+				Date signDate = null;
+				Calendar cal = Calendar.getInstance();
+				Date currentDate = cal.getTime();
+				String signLine = s.getLine(1).replace("§b", "");
 				try {
-
-					while (isRunning() == true) {
-
-						Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
-						Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
-						if (!(block.getState() instanceof Sign)) {
-							return;
-						}
-						Sign sign = (Sign) block.getState();
-						/* Set the Sign */
-						sign.setLine(1, ChatColor.AQUA + date);
-						sign.update(true);
-
-						Thread.sleep(1000 * sekunden);
-
-					}
-				} catch (InterruptedException e) {
+					signDate = new SimpleDateFormat("dd.MM.yyyy").parse(signLine);
+				} catch (ParseException e) {
 					e.printStackTrace();
 				}
+				if (!(currentDate.equals(signDate))) {
+
+				}
 			}
-		}.start();
+		}, 0L, 1800 * 20L);
 	}
 
-	public void aktualisieren(final double x, final double y, final double z) {
-
-		Location sloc = new Location(Bukkit.getServer().getWorld("world"), x, y, z);
-		Block block = (Block) Bukkit.getServer().getWorld("world").getBlockAt(sloc);
-		Sign sign = (Sign) block.getState();
-
-		if (!(block.getState() instanceof Sign)) {
-			return;
-		}
-
-		/* Set the Sign */
-		sign.setLine(1, ChatColor.AQUA + date);
-		sign.update(true);
+	public void stopScheduler(Christmas main) {
+		main.getServer().getScheduler().cancelTask(datesched);
 	}
 
 }

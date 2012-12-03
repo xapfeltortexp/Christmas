@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -80,54 +81,41 @@ public class ChristmasListener implements Listener {
 			}
 
 			event.setLine(1, ChatColor.AQUA + date);
-
 			main.ccl.load();
 
-			if (main.ccl.getConfig().getString("ChristmasSign.X") == null) {
+			int x = event.getBlock().getX();
+			int y = event.getBlock().getY();
+			int z = event.getBlock().getZ();
+			String world = event.getBlock().getWorld().getName();
 
-				int x = event.getBlock().getX();
-				int y = event.getBlock().getY();
-				int z = event.getBlock().getZ();
-
-				main.ccl.getConfig().set("ChristmasSign.X", x);
-				main.ccl.getConfig().set("ChristmasSign.Y", y);
-				main.ccl.getConfig().set("ChristmasSign.Z", z);
-				player.sendMessage(main.prefix + "You created a new sign!");
-
-				util.setRunning(true);
-				util.startScheduler(60 * 60, x, y, z);
-
-				main.ccl.save();
-
+			if (main.ccl.getConfig().getConfigurationSection("ChristmasSign") == null) {
+				player.sendMessage(main.prefix + "You created a new advent calendar sign!");
+				util.startScheduler(this.main);
 			} else {
-
-				int x = event.getBlock().getX();
-				int y = event.getBlock().getY();
-				int z = event.getBlock().getZ();
-
 				int mainx = main.ccl.getConfig().getInt("ChristmasSign.X");
 				int mainy = main.ccl.getConfig().getInt("ChristmasSign.Y");
 				int mainz = main.ccl.getConfig().getInt("ChristmasSign.Z");
-
-				Block block = event.getPlayer().getWorld().getBlockAt(mainx, mainy, mainz);
+				String mainworld = main.ccl.getConfig().getString("ChristmasSign.World");
+				World w = Bukkit.getWorld(mainworld);
+				Block block = w.getBlockAt(mainx, mainy, mainz);
 				block.breakNaturally();
-				player.sendMessage(main.prefix + "The old Christmas sign got destroyed!");
-
-				main.ccl.getConfig().set("ChristmasSign.X", x);
-				main.ccl.getConfig().set("ChristmasSign.Y", y);
-				main.ccl.getConfig().set("ChristmasSign.Z", z);
+				player.sendMessage(main.prefix + "The old Christmas sign got destroyed, because a new one has been created!");
 				player.sendMessage(main.prefix + "The location of the sign was successfully changed!");
-
-				main.ccl.save();
 			}
-
+			main.ccl.getConfig().set("ChristmasSign.X", x);
+			main.ccl.getConfig().set("ChristmasSign.Y", y);
+			main.ccl.getConfig().set("ChristmasSign.Z", z);
+			main.ccl.getConfig().set("ChristmasSign.World", world);
 			main.ccl.save();
+			util.startScheduler(main);
 		}
 	}
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-
+		if (event.isCancelled()) {
+			return;
+		}
 		Player player = event.getPlayer();
 
 		if (!(event.getBlock().getState() instanceof Sign)) {
@@ -137,25 +125,24 @@ public class ChristmasListener implements Listener {
 		Sign sign = (Sign) event.getBlock().getState();
 
 		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]") || sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Advent" + ChatColor.BLACK + "]")) {
-
-			util.setRunning(false);
-
+			if (!(player.hasPermission("christmas.sign.create"))) {
+				player.sendMessage(main.prefix + "You dont have Permissions!");
+				event.getBlock().breakNaturally();
+				return;
+			}
+			util.stopScheduler(main);
 			player.sendMessage(main.prefix + "You destroyed the Christmas sign!");
-
 			main.ccl.load();
-
-			main.ccl.getConfig().set("ChristmasSign.X", null);
-			main.ccl.getConfig().set("ChristmasSign.Y", null);
-			main.ccl.getConfig().set("ChristmasSign.Z", null);
 			main.ccl.getConfig().set("ChristmasSign", null);
-
 			main.ccl.save();
 		}
 	}
 
 	@EventHandler
 	public void onSignIntract(PlayerInteractEvent event) {
-
+		if (event.isCancelled()) {
+			return;
+		}
 		Player player = event.getPlayer();
 
 		if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
@@ -186,10 +173,8 @@ public class ChristmasListener implements Listener {
 			signCal.setTime(signDate);
 			int signDay = signCal.get(Calendar.DAY_OF_MONTH);
 			if (day != signDay) {
-				int x = main.ccl.getConfig().getInt("ChristmasSign.X");
-				int y = main.ccl.getConfig().getInt("ChristmasSign.Y");
-				int z = main.ccl.getConfig().getInt("ChristmasSign.Z");
-				util.aktualisieren(x, y, z);
+				sign.setLine(1, ChatColor.AQUA + new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime()));
+				sign.update();
 			}
 
 			if (main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(player.getName())) {
