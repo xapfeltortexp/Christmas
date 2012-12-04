@@ -1,14 +1,15 @@
 package Christmas.Util;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
 
 import net.minecraft.server.Packet103SetSlot;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -89,20 +90,17 @@ public class ChristmasUtil {
 				int y = cc.getInt("ChristmasSign.Y");
 				int z = cc.getInt("ChristmasSign.Z");
 				String world = cc.getString("ChristmasSign.World");
-				World w = Bukkit.getWorld(world);
+				World w = main.getServer().getWorld(world);
 				Block sb = w.getBlockAt(x, y, z);
 				Sign s = (Sign) sb.getState();
-				Date signDate = null;
 				Calendar cal = Calendar.getInstance();
 				Date currentDate = cal.getTime();
 				String signLine = s.getLine(1).replace("§b", "");
-				try {
-					signDate = new SimpleDateFormat("dd.MM.yyyy").parse(signLine);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				if (!(currentDate.equals(signDate))) {
-
+				String cdate = new SimpleDateFormat("dd.MM.yyyy").format(currentDate);
+				if (!(cdate.equalsIgnoreCase(signLine))) {
+					s.setLine(1, ChatColor.AQUA + cdate);
+					s.update();
+					main.getLogger().log(Level.INFO, "Sign has been updated!");
 				}
 			}
 		}, 0L, 1800 * 20L);
@@ -111,5 +109,4 @@ public class ChristmasUtil {
 	public void stopScheduler(Christmas main) {
 		main.getServer().getScheduler().cancelTask(datesched);
 	}
-
 }

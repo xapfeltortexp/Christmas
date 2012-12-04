@@ -60,12 +60,12 @@ public class Christmas extends JavaPlugin {
 
 		/* Load config.yml*/
 		loadConfig();
-
-		System.out.println("[Christmas] Plugin successfully loaded.");
-
+		/* Start Scheduler */
 		if (ccl.getConfig().getConfigurationSection("ChristmasSign") != null) {
 			util.startScheduler(this);
 		}
+		/* Output Message */
+		System.out.println("[Christmas] Plugin successfully loaded.");
 	}
 
 	/* Disable the Plugin */
