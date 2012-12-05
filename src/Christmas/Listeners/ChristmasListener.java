@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -177,6 +178,7 @@ public class ChristmasListener implements Listener {
 			if (day != signDay) {
 				sign.setLine(1, ChatColor.AQUA + new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime()));
 				sign.update();
+				main.getLogger().log(Level.INFO, "Sign has been updated!");
 			}
 
 			if (main.ccl.getConfig().getStringList("PresentGet.Day_" + day).contains(player.getName())) {
