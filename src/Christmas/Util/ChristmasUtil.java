@@ -101,9 +101,11 @@ public class ChristmasUtil {
 					s.setLine(1, ChatColor.AQUA + cdate);
 					s.update();
 					main.getLogger().log(Level.INFO, "Sign has been updated!");
+				} else {
+					main.getLogger().log(Level.INFO, "No need to update the sign.");
 				}
 			}
-		}, 0L, 1800 * 20L);
+		}, 200L, 1800 * 20L);
 	}
 
 	public void stopScheduler(Christmas main) {
