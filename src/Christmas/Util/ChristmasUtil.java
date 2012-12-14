@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 
-import net.minecraft.server.Packet103SetSlot;
+import net.minecraft.server.v1_4_5.Packet103SetSlot;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,7 +15,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.Configuration;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,7 +40,7 @@ public class ChristmasUtil {
 	}
 
 	public String replaceColorCodes(String message) {
-		return message.replaceAll("(?i)&([a-n0-9])", "§$1");
+		return message.replaceAll("(?i)&([a-n0-9])", "ï¿½$1");
 	}
 
 	public void removeOpener(ArrayList<String> arrayList, String name) {
@@ -67,10 +67,10 @@ public class ChristmasUtil {
 				nativeindex = i + 36;
 
 			ItemStack olditem = c.getInventory().getItem(i);
-			net.minecraft.server.ItemStack item = null;
+			net.minecraft.server.v1_4_5.ItemStack item = null;
 
 			if (olditem != null && olditem.getType() != Material.AIR) {
-				item = new net.minecraft.server.ItemStack(0, 0, 0);
+				item = new net.minecraft.server.v1_4_5.ItemStack(0, 0, 0);
 				item.id = olditem.getTypeId();
 				item.count = olditem.getAmount();
 			}
@@ -95,7 +95,7 @@ public class ChristmasUtil {
 				Sign s = (Sign) sb.getState();
 				Calendar cal = Calendar.getInstance();
 				Date currentDate = cal.getTime();
-				String signLine = s.getLine(1).replace("§b", "");
+				String signLine = s.getLine(1).replace("ï¿½b", "");
 				String cdate = new SimpleDateFormat("dd.MM.yyyy").format(currentDate);
 				if (!(cdate.equalsIgnoreCase(signLine))) {
 					s.setLine(1, ChatColor.AQUA + cdate);
