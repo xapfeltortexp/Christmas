@@ -68,8 +68,8 @@ public class ChristmasListener implements Listener {
 
 		if (event.getLine(0).equalsIgnoreCase("[Christmas]") || event.getLine(0).equalsIgnoreCase("[Advent]")) {
 
-			if (!(player.hasPermission("christmas.sign.create"))) {
-				player.sendMessage(main.prefix + "You dont have Permissions!");
+			if (!(player.hasPermission("Christmas.sign.create"))) {
+				player.sendMessage(main.prefix + ChatColor.RED + "You dont have Permission to create the christmas sign!");
 				event.getBlock().breakNaturally();
 				return;
 			}
@@ -126,9 +126,9 @@ public class ChristmasListener implements Listener {
 		Sign sign = (Sign) event.getBlock().getState();
 
 		if (sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Christmas" + ChatColor.BLACK + "]") || sign.getLine(0).equalsIgnoreCase("[" + ChatColor.GREEN + "Advent" + ChatColor.BLACK + "]")) {
-			if (!(player.hasPermission("christmas.sign.create"))) {
-				player.sendMessage(main.prefix + "You dont have Permissions!");
-				event.getBlock().breakNaturally();
+			if (!player.hasPermission("Christmas.sign.destroy")) {
+				player.sendMessage(main.prefix + ChatColor.RED + "You dont have Permission to destroy the christmas sign!");
+				event.setCancelled(true);
 				return;
 			}
 			util.stopScheduler(main);
@@ -173,8 +173,7 @@ public class ChristmasListener implements Listener {
 			}
 			signCal.setTime(signDate);
 			int signDay = signCal.get(Calendar.DAY_OF_MONTH);
-			
-			
+
 			if (day != signDay) {
 				sign.setLine(1, ChatColor.AQUA + new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime()));
 				sign.update();
@@ -192,13 +191,13 @@ public class ChristmasListener implements Listener {
 			}
 
 			for (int i = 1; i < 25; i++) {
-				
+
 				if (i == day) {
-					
+
 					String dateInConfig = "Day_" + day;
 					List<String> allItems = main.getConfig().getStringList(dateInConfig + ".Items");
 					List<String> allCommands = main.getConfig().getStringList(dateInConfig + ".Command");
-					
+
 					if (main.getConfig().getBoolean(dateInConfig + ".GiveItems")) {
 						for (String id : allItems) {
 
