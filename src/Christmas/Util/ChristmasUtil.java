@@ -6,18 +6,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 
-import net.minecraft.server.Packet103SetSlot;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.Configuration;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import Christmas.Christmas;
 
@@ -55,34 +50,8 @@ public class ChristmasUtil {
 		Bukkit.broadcastMessage(main.prefix + replaceColorCodes(message).replace("%player%", player.getName()).replace("%day%", nowday));
 	}
 
-	public void updateInventory(Player player) {
-
-		CraftPlayer c = (CraftPlayer) player;
-
-		for (int i = 0; i < 36; i++) {
-
-			int nativeindex = i;
-
-			if (i < 9)
-				nativeindex = i + 36;
-
-			ItemStack olditem = c.getInventory().getItem(i);
-			net.minecraft.server.ItemStack item = null;
-
-			if (olditem != null && olditem.getType() != Material.AIR) {
-				item = new net.minecraft.server.ItemStack(0, 0, 0);
-				item.id = olditem.getTypeId();
-				item.count = olditem.getAmount();
-			}
-
-			Packet103SetSlot pack = new Packet103SetSlot(0, nativeindex, item);
-			c.getHandle().netServerHandler.sendPacket(pack);
-		}
-
-	}
-
 	public void startScheduler(final Christmas main) {
-		datesched = Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(main, new Runnable() {
+		datesched = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(main, new Runnable() {
 			public void run() {
 				main.ccl.load();
 				Configuration cc = main.ccl.getConfig();

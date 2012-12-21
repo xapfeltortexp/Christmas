@@ -139,6 +139,7 @@ public class ChristmasListener implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onSignIntract(PlayerInteractEvent event) {
 		if (event.isCancelled()) {
@@ -217,7 +218,7 @@ public class ChristmasListener implements Listener {
 								player.getInventory().addItem(new ItemStack(itemID, amountID));
 							}
 
-							util.updateInventory(player);
+							player.updateInventory();
 						}
 						player.sendMessage(main.prefix + util.replaceColorCodes(main.getConfig().getString("Messages.LikePresent").replace("%day%", day + "")));
 					}
